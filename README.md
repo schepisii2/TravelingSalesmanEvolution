@@ -1,10 +1,10 @@
 # TravelingSalesmanEvolution
 A between semester competition where two students attempt to solve the traveling salesman problem using evolutionary algorithms.
 
-1 Objective
+# 1 Objective
 Write a program to use Evolutionary Computation to find an approximate solution instances of the
 Traveling Salesperson Problem (TSP). Your program must be able take a list of cities and their
-intercity costs (an n × n distance matrix, where there are n cities). It should output a “tour” (the
+intercity costs (an n  n distance matrix, where there are n cities). It should output a “tour” (the
 list of cities visited in order), the total distance of the tour, and the number of evaluations needed
 to find that solution. There’s more information about this below. The goal is to (in general) be able
 to find the lowest cost tour with the fewest number of evaluations. You will be judged using data
@@ -17,7 +17,8 @@ the problem is much harder.
 You may use any kind of evolutionary algorithm you like. Our reference for this problem is
 Chapter 16 from A.K. Dewdney’s The New Turing Omnibus:
 https://drive.google.com/file/d/1wwM0PfJ-dzpochbbZX22jYAIbOJ7raZ8/view?usp=sharing
-2 Input File Format
+
+# 2 Input File Format
 Your program will consider two input files. The first file is called the TSP specification file, and it
 will contain two or three sections:
 1. A header with key-value pairs, each on its own line and separated by a colon. E.g.,
@@ -45,10 +46,11 @@ cities represented above might have a file with following content:
 4727 0 3588 2012
 1205 3588 0 5163
 6363 2012 5163 0
-In other words, it costs 4, 727 to go from city 1 to city 2 (or vice-versa). In the simplest
+In other words, it costs 4; 727 to go from city 1 to city 2 (or vice-versa). In the simplest
 case, this is just the distance between the cities . You can find example sets to play with here:
 https://people.sc.fsu.edu/˜jburkardt/datasets/tsp/tsp.html
-3 Evolutionary Algorithms
+
+# 3 Evolutionary Algorithms
 Dewdney talks about a “genetic algorithm”, but this term is a bit outdated. The more general turn
 for algorithms that use abstract models of Darwinian to optimize are “evolutionary algorithms”
 (EAs). Such methods iteratively use a parent population of candidate solutions (e.g., a possible
@@ -60,12 +62,12 @@ who gets to be parents, and by picking who survives into the next generation.
 Here’s some very general pseudocode for a variety of evolutionary algorithms:
 2
 Algorithm 1: Generic EA pseudocode
-initialize a population of parents of size µ;
-evaluate fitness ∀x ∈ P;
+initialize a population of parents of size ;
+evaluate fitness 8x 2 P;
 while While condition do
 select the subset of parents who will breed;
-apply genetic operators to generate population of children of size λ;
-evaluate fitness ∀x ∈ C select which individuals survive to become parents;
+apply genetic operators to generate population of children of size ;
+evaluate fitness 8x 2 C select which individuals survive to become parents;
 end
 Decisions that algorithm writers typically must make:
 • How to encode candidate solutions of the problem (representation)
@@ -73,21 +75,20 @@ Decisions that algorithm writers typically must make:
 • How children are generated (genetic operators)
 • How to decide who becomes parents in the next generation (survival selection)
 • How to decide when to stop
-For example, a classical “genetic algorithm” (GA) typically uses a binary encoding— individuals
+For example, a classical “genetic algorithm” (GA) typically uses a binary encoding—individuals
 are represented as a fixed-length string of 1’s and 0’s that maps to a solution to the problem in a
 particular way. Breeding parents in a GA are often selected by drawing individuals from the parent
 population probabilistically proportionate to their fitness. Genetic operators are typically bit-flip
 mutation (flip each bit with independent probability 1
-n
-, where n is the length of the binary string)
+n, where n is the length of the binary string)
 and 1-point crossover (pick a position c the binary string, then generate a child by taking the first c
-bits from one parent and the remaining n − c bits from the other). If there are µ parents, then GAs
-will typically generate λ = µ children, and all children survive to the next generation.
-On the other hand “evolutionary strategies” (ES) work differently. There are two kinds: (µ, λ)
-and (µ + λ). In either case, many types of encodings are possible and all parents breed to produce
-λ >> µ children, typically only with some kind of mutation. In a (µ, λ)-ES, individuals are strictly
-ordered by fitness and the best µ of the λ children become parents in the next generation, while
-in a (µ + λ)-ES, both the children and parents are strictly ordered and the best µ of the µ + λ
+bits from one parent and the remaining n 􀀀 c bits from the other). If there are  parents, then GAs
+will typically generate  =  children, and all children survive to the next generation.
+On the other hand “evolutionary strategies” (ES) work differently. There are two kinds: (; )
+and ( + ). In either case, many types of encodings are possible and all parents breed to produce
+ >>  children, typically only with some kind of mutation. In a (; )-ES, individuals are strictly
+ordered by fitness and the best  of the  children become parents in the next generation, while
+in a ( + )-ES, both the children and parents are strictly ordered and the best  of the  + 
 individuals survive to become parents in the next generation.
 There are many other variations. I’ve given you a few reference, below, for you to explore your
 options.
@@ -102,7 +103,8 @@ is a valid (though suboptimal) tour.
 improve things (Dewdney has a suggestion that may help).
 Here’s a relatively modern Python library for EAs:
 https://www.osti.gov/servlets/purl/1649229
-4 Judging
+
+# 4 Judging
 You will give a very short presentation of your solution to a panel of faculty members at the start of
 Fall term. You don’t need slides, just show us your program and talk about what choices you made
 for your EA (representation, parent selection, genetic operators, survival selection, etc.). You’ll
@@ -114,13 +116,14 @@ Judges will consider several factors when choosing a solution:
 • Does your program tend to find its solution with the fewest evaluations?
 • Did your team work well together?
 • Did you make an effort to make your code clean, readable, and consistent?
-A tour through cities A, B, C, and D might be: A → C → D → B. The total cost of this tour
-is the sum of the costs of the (A, C); (C, D); (D, B); and (B, A) edges.
+A tour through cities A, B, C, and D might be: A ! C ! D ! B. The total cost of this tour
+is the sum of the costs of the (A;C); (C;D); (D;B); and (B;A) edges.
 Note that each iteration through an EA is typically called a generation, and though it’s pretty
 common for the termination criteria to be a fixed count on the number of generations, your will be
 counting the number of times you evaluate candidate solutions for performance purposes, not the
 number of generations. So you must count every time you evaluate fitness, for whatever reason.
-5 References
+
+# 5 References
 Some websites that may help:
 • https://www.cs.vu.nl/˜gusz/papers/ec-intro-naw.pdf
 • https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
