@@ -37,30 +37,37 @@ https://drive.google.com/file/d/1wwM0PfJ-dzpochbbZX22jYAIbOJ7raZ8/view?usp=shari
 Your program will consider two input files. The first file is called the TSP specification file, and it
 will contain two or three sections:
 1. A header with key-value pairs, each on its own line and separated by a colon. E.g.,
+
 NAME : att4
 COMMENT : 4 capitals of the US
 TYPE : TSP
 DIMENSION : 4
 EDGE_WEIGHT_TYPE : ATT
 1
+
 2. A section entitled NODE COORD SECTION, where each line represents a city and contains
 an ID and xy coordinates, separated by spaces. E.g.,
+
 NODE_COORD_SECTION
 1 6734 1453
 2 2233 10
 3 5530 1424
 4 401 841
+
 3. The third section is optional and is entitled the TOUR SECTION. It contains a list of city IDs
 representing the optimal tour (if known). This is for comparison purposes only; you should
 not use this information in your program because it may not be given
+
 The second file is called the intercity costs file. Each line represents the rows of the cost matrix,
 where the implied order of the cities is given by the city order presented in the second section of
 specifications file, and each value represents the cost of traveling from the city. For example, the
 cities represented above might have a file with following content:
+
 0 4727 1205 6363
 4727 0 3588 2012
 1205 3588 0 5163
 6363 2012 5163 0
+
 In other words, it costs 4; 727 to go from city 1 to city 2 (or vice-versa). In the simplest
 case, this is just the distance between the cities . You can find example sets to play with here:
 https://people.sc.fsu.edu/˜jburkardt/datasets/tsp/tsp.html
