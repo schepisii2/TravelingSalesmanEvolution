@@ -1,3 +1,18 @@
+# one way to run the code
+Step 1: set up a virtual environment 
+    pipenv --python 3.6
+
+Step 2: Install pandas and numpy 
+    sudo pip install pandas
+    sudo pip install numpy
+
+Step 3: Active the virtual environment
+    pipenv shell
+
+Step 4: Run the program
+    python main.py 
+
+
 # TravelingSalesmanEvolution
 A between semester competition where two students attempt to solve the traveling salesman problem using evolutionary algorithms.
 
