@@ -49,7 +49,7 @@ def generate_route(city_matrix):
 def initial_pop(pop_size, city_list):
 # generate the initial population by making a list of several routes
   pop = []
-  for i in range(0, pop_size)
+  for i in range(0, pop_size):
     while True:
       temp_route = generate_route(city_list)
       if (pop.count(temp_route)==0):
