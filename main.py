@@ -167,11 +167,32 @@ def geneticAlgorithm(population, popSize, eliteSize, mutationRate, max_fitness):
   print("Final distance: " + str(1 / best[0][1]))
   return bestRoute
 
-cityList = [
-[0, 4272, 1205, 6363],
-[4272, 0, 3588, 2012],
-[1205, 3588, 0, 5163],
-[6363, 2012, 5163, 0]
-]
+cost_matrix=[]
+cost_file_name = input("Intercity costs file name: ")
 
-geneticAlgorithm(population=cityList, popSize=4, eliteSize=2, mutationRate=0.01, max_fitness=500)
+try:
+# open cost file
+  cost_file = open(cost_file_name)
+
+# write values into cost_matrix
+  lines = cost_file.read().splitlines()
+  for x in range(0, len(lines)):
+    line = lines[x].split(' ')
+    cost_matrix += [line]
+
+
+# print cost_matrix
+  print("COST MATRIX: " + str(cost_matrix))
+
+except (IOError, ValueError, EOFError) as e:
+# catch if cannot open file, invalid value, or end of file before expect
+    cost_file.close()
+
+#cityList = [
+#[0, 4272, 1205, 6363],
+#[4272, 0, 3588, 2012],
+#[1205, 3588, 0, 5163],
+#[6363, 2012, 5163, 0]
+#]
+
+geneticAlgorithm(population=cost_matrix, popSize=4, eliteSize=2, mutationRate=0.01, max_fitness=500)
