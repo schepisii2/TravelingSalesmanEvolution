@@ -178,6 +178,7 @@ try:
   lines = cost_file.read().splitlines()
   for x in range(0, len(lines)):
     line = lines[x].split(' ')
+    line = list(map(int, line)) #convert str to int
     cost_matrix += [line]
 
 
