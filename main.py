@@ -159,14 +159,18 @@ def geneticAlgorithm(population, popSize, eliteSize, mutationRate, max_fitness):
   if verbose: print(pop)
   #print("Initial distance: " + str(1 / rank_routes(pop,population)[0][1]))
     
-  graph_vals = []
+  x = []
+  y = []
 
   while fitness_count < max_fitness:
     pop,fitness_count = nextGeneration(pop, eliteSize, mutationRate, population, fitness_count)
     best, fitness_count = rank_routes(pop, population,fitness_count-len(population))
-    graph_vals.append(1 / best[0][1])
+    x.append(fitness_count)
+    y.append(1 / best[0][1])
 
-  print(graph_vals)
+  #for i in range(len(x)):
+    #print("(",x[i], ",", y[i],")", end = '')
+  #print(x)
   best, fitness_count = rank_routes(pop, population,fitness_count)
   bestRouteIndex = best[0][0]
   bestRoute = pop[bestRouteIndex]
@@ -189,11 +193,11 @@ try:
     cost_matrix += [line]
 
 # print cost_matrix
-  print("COST MATRIX: " + str(cost_matrix))
+  #print("COST MATRIX: " + str(cost_matrix))
 
 except (IOError, ValueError, EOFError) as e:
 # catch if cannot open file, invalid value, or end of file before expect
     cost_file.close()
 
 #if no crossover, eliteSize = popSize
-geneticAlgorithm(population=cost_matrix, popSize=100, eliteSize=10, mutationRate=0.01, max_fitness=10000)
+geneticAlgorithm(population=cost_matrix, popSize=100, eliteSize=5, mutationRate=0.02, max_fitness=15000)
