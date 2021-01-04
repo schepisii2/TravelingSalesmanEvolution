@@ -50,12 +50,14 @@ def initial_pop(pop_size, city_list):
 # generate the initial population by making a list of several routes
   pop = []
   for i in range(0, pop_size):
-    while True:
+    ready = False
+    while not ready:
       temp_route = generate_route(city_list)
-      if (pop.count(temp_route)==0):
-       pop.append(temp_route)
+      if temp_route in pop:
+        ready = False
       else:
-        break
+        pop.append(temp_route)
+        ready = True
   return pop
 
 def rank_routes(population,dist_matrix,fitness_count):
@@ -157,9 +159,14 @@ def geneticAlgorithm(population, popSize, eliteSize, mutationRate, max_fitness):
   if verbose: print(pop)
   #print("Initial distance: " + str(1 / rank_routes(pop,population)[0][1]))
     
+  graph_vals = []
+
   while fitness_count < max_fitness:
     pop,fitness_count = nextGeneration(pop, eliteSize, mutationRate, population, fitness_count)
-    
+    best, fitness_count = rank_routes(pop, population,fitness_count-len(population))
+    graph_vals.append(1 / best[0][1])
+
+  print(graph_vals)
   best, fitness_count = rank_routes(pop, population,fitness_count)
   bestRouteIndex = best[0][0]
   bestRoute = pop[bestRouteIndex]
@@ -189,4 +196,4 @@ except (IOError, ValueError, EOFError) as e:
     cost_file.close()
 
 #if no crossover, eliteSize = popSize
-geneticAlgorithm(population=cost_matrix, popSize=4, eliteSize=4, mutationRate=0.01, max_fitness=500)
+geneticAlgorithm(population=cost_matrix, popSize=100, eliteSize=10, mutationRate=0.01, max_fitness=10000)
